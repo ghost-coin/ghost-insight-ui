@@ -115,13 +115,13 @@ margin-left: 0;
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {background-color: #373D42;}
 
 .navbar-default {
-  background-color: #8DC429;
+  background-color: #02E8AF;
   margin: 0;
   border: 0;
 }
 
 .navbar-default .navbar-nav>li>a {
-  color: #F4FBE8;
+  color: #121212;
   font-family: 'Ubuntu', sans-serif;
   padding-left: 20px;
   padding-right: 20px;
@@ -166,7 +166,7 @@ margin-left: 0;
 }
 
 .navbar-form .form-control {
-  background-color: #7CAD23;
+  background-color: #676767;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -216,7 +216,7 @@ margin-left: 0;
 .status {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  background-color: #597338;
+  background-color: #676768;
   border-radius: 3px;
   margin: 15px 0;
   padding: 8px 10px;
@@ -316,7 +316,7 @@ margin-left: 0;
   border-radius: 2px;
 }
 .btn-primary {
-  background-color: #8DC429;
+  background-color: #02E8AF;
   border: 2px solid #76AF0F;
 }
 
@@ -363,7 +363,7 @@ margin-left: 0;
 }
 
 .txvalues-primary {
-  background-color: #8DC429;
+  background-color: #02E8AF;
 }
 
 .txvalues-default {
@@ -386,7 +386,8 @@ margin-left: 0;
   font-size: 14px;
   font-weight: normal;
 }
-.progress-bar-info { background-color: #8DC429; }
+.progress-bar-info { background-color: #02E8AF; }
+.progress-bar { color: #000; }
 
 /* Set the fixed height of the footer here */
 #footer {
@@ -826,7 +827,7 @@ a.v_highlight_more {
   }
   .txvalues-primary {
     background: none;
-    color: #8DC429;
+    color: #02E8AF;
   }
   .txvalues-default {
     background: none;

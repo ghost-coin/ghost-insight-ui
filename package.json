@@ -1,8 +1,8 @@
 {
-  "name": "insight-ui",
-  "description": "An open-source frontend for the Insight API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
+  "name": "particl-insight-ui",
+  "description": "An open-source frontend for the Insight API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the particl network and build your own services with it.",
   "version": "0.4.0",
-  "repository": "git://github.com/bitpay/insight-ui.git",
+  "repository": "git://github.com/particl/particl-insight.git",
   "contributors": [
     {
       "name": "Matias Alejo Garcia",
@@ -26,21 +26,21 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/bitpay/insight-ui/issues"
+    "url": "https://github.com/particl/particl-insight-ui/issues"
   },
-  "homepage": "https://github.com/bitpay/insight-ui",
+  "homepage": "https://github.com/particl/particl-insight-ui",
   "license": "MIT",
   "keywords": [
     "insight",
     "blockchain",
     "blockexplorer",
-    "bitcoin",
+    "particl",
     "bitcore",
     "front-end"
   ],
   "bitcoreNode": "bitcore-node",
   "insightConfig": {
-    "apiPrefix": "insight-api",
+    "apiPrefix": "particl-insight-api",
     "routePrefix": "insight"
   },
   "scripts": {
