@@ -60,6 +60,10 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       tmp[addr].valueSat += Math.round(items[i].value * COIN);
       tmp[addr].items.push(items[i]);
       tmp[addr].notAddr = notAddr;
+      tmp[addr].type = items[i].type;
+      
+      if (items[i].data)
+        tmp[addr].data = items[i].data;
 
       if (items[i].unconfirmedInput)
         tmp[addr].unconfirmedInput = true;
@@ -81,13 +85,15 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
   var _paginate = function(data) {
     $scope.loading = false;
-
     pagesTotal = data.pagesTotal;
     pageNum += 1;
-
+    
+    $rootScope.blockReward = 0;
     data.txs.forEach(function(tx) {
       _processTX(tx);
       $scope.txs.push(tx);
+      if (tx.fees < 0) // block reward is negative fee
+        $rootScope.blockReward = -tx.fees;
     });
   };
 

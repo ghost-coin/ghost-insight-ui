@@ -254,12 +254,12 @@ msgid "Message"
 msgstr "メッセージ"
 
 #: public/views/transaction.html
-msgid "Mined Time"
+msgid "Staked Time"
 msgstr "採掘時刻"
 
 #: public/views/block.html public/views/block_list.html
 #: public/views/index.html
-msgid "Mined by"
+msgid "Staked by"
 msgstr "採掘者"
 
 #: public/views/status.html
@@ -534,11 +534,11 @@ msgid "first seen at"
 msgstr "最初に発見された日時"
 
 #: public/views/transaction/tx.html
-msgid "mined"
+msgid "staked"
 msgstr "採掘された"
 
 #: public/views/block_list.html
-msgid "mined on:"
+msgid "staked on:"
 msgstr "採掘日時:"
 
 #~ msgid "(Mainchain)"
@@ -556,7 +556,7 @@ msgstr "採掘日時:"
 #~ msgid "BlockHash"
 #~ msgstr "ブロックのハッシュ値"
 
-#~ msgid "Blocks <br> mined on:"
+#~ msgid "Blocks <br> staked on:"
 #~ msgstr "ブロック <br> 採掘日"
 
 #~ msgid "Coinbase"

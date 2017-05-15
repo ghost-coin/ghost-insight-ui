@@ -235,12 +235,12 @@ msgid "Loading..."
 msgstr "Lade..."
 
 #: public/views/transaction.html
-msgid "Mined Time"
+msgid "Staked Time"
 msgstr "Block gefunden (Mining)"
 
 #: public/views/block.html public/views/block_list.html
 #: public/views/index.html
-msgid "Mined by"
+msgid "Staked by"
 msgstr "Gefunden von"
 
 #: public/views/status.html
@@ -463,11 +463,11 @@ msgid "first seen at"
 msgstr "zuerst gesehen am"
 
 #: public/views/transaction/tx.html
-msgid "mined"
+msgid "staked"
 msgstr "gefunden"
 
 #: public/views/block_list.html
-msgid "mined on:"
+msgid "staked on:"
 msgstr "vom:"
 
 msgid "Waiting for blocks"

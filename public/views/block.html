@@ -58,18 +58,8 @@
             </td>
           </tr>
           <tr>
-            <td><strong translate>Block Reward</strong></td>
-            <td class="text-right text-muted">{{$root.currency.getConvertion(block.reward) || block.reward + ' PART'}}</td>
-          </tr> 
-          <tr>
             <td><strong translate>Timestamp</strong></td>
             <td class="text-right text-muted">{{block.time * 1000 | date:'medium'}}</td>
-          </tr>
-          <tr data-ng-show="block.poolInfo">
-            <td><strong translate>Mined by</strong></td>
-            <td class="text-right text-muted">
-              <a href="{{block.poolInfo.url}}" target="_blank" title="{{block.poolInfo.poolName}}">{{block.poolInfo.poolName}}</a>
-            </td>
           </tr>
           <tr>
             <td><strong>Merkle Root</strong></td>
@@ -77,6 +67,15 @@
               <div class="ellipsis">
                 <span class="btn-copy" clip-copy="block.merkleroot"></span>
                 <span>{{block.merkleroot}}</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Witness Merkle Root</strong></td>
+            <td class="text-right text-muted">
+              <div class="ellipsis">
+                <span class="btn-copy" clip-copy="block.witnessmerkleroot"></span>
+                <span>{{block.witnessmerkleroot}}</span>
               </div>
             </td>
           </tr>
@@ -90,6 +89,19 @@
       <div class="col-md-6">
         <table class="table">
           <tbody>
+          <!--
+          <tr data-ng-show="block.poolInfo">
+            <td><strong translate>Mined by</strong></td>
+            <td class="text-right text-muted">
+              <a href="{{block.poolInfo.url}}" target="_blank" title="{{block.poolInfo.poolName}}">{{block.poolInfo.poolName}}</a>
+            </td>
+          </tr>
+          -->
+          <tr>
+            <td><strong translate>Block Reward</strong></td>
+            <td data-ng-show="!loading" class="text-right text-muted" id="idBlockReward">{{$root.currency.getConvertion(blockReward) || blockReward + ' PART'}}</td>
+            <td data-ng-show="loading" class="text-right text-muted" translate>Loading</td>
+          </tr>
           <tr>
             <td> <strong translate>Difficulty</strong></td>
             <td class="text-right text-muted">{{block.difficulty}}</td>
@@ -105,10 +117,6 @@
           <tr>
             <td> <strong translate>Version</strong></td>
             <td class="text-right text-muted">{{block.version}}</td>
-          </tr>
-          <tr>
-            <td> <strong>Nonce</strong></td>
-            <td class="text-right text-muted">{{block.nonce}}</td>
           </tr>
           <tr data-ng-show="block.nextblockhash">
             <td><strong translate>Next Block</strong></td>

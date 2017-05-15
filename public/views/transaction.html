@@ -52,7 +52,7 @@
           <td><strong translate>Size</strong></td>
           <td class="text-muted text-right">{{tx.size}} (bytes)</td>
         </tr>
-        <tr data-ng-show="tx.fees">
+        <tr data-ng-show="tx.fees && tx.fees > 0">
           <td><strong translate>Fee Rate</strong></td>
           <td class="text-muted text-right">{{$root.currency.getConvertion((tx.fees * 1000) / tx.size) + ' per kB' || ((tx.fees * 1000) / tx.size) + 'PART per kB'}}</td>
         </tr>
@@ -62,7 +62,7 @@
           <td data-ng-show="!tx.time" class="text-muted text-right">N/A</td>
         </tr>
         <tr>
-          <td><strong translate>Mined Time</strong></td>
+          <td><strong translate>Staked Time</strong></td>
           <td data-ng-show="tx.blocktime" class="text-muted text-right">{{tx.blocktime * 1000|date:'medium'}}</td>
           <td data-ng-show="!tx.blocktime" class="text-muted text-right">N/A</td>
         </tr>

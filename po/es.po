@@ -231,12 +231,12 @@ msgid "Loading..."
 msgstr "Cargando..."
 
 #: public/views/transaction.html
-msgid "Mined Time"
+msgid "Staked Time"
 msgstr "Hora de Minado"
 
 #: public/views/block.html public/views/block_list.html
 #: public/views/index.html
-msgid "Mined by"
+msgid "Staked by"
 msgstr "Minado por"
 
 #: public/views/status.html
@@ -459,11 +459,11 @@ msgid "first seen at"
 msgstr "Visto a"
 
 #: public/views/transaction/tx.html
-msgid "mined"
+msgid "staked"
 msgstr "minado"
 
 #: public/views/block_list.html
-msgid "mined on:"
+msgid "staked on:"
 msgstr "minado el:"
 
 #~ msgid "Waiting for blocks"
