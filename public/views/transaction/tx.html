@@ -218,7 +218,9 @@
               <p><strong>Decoded</strong></p>
               <p class="col-md-11" data-ng-show="vout.v && vout.v.length > 0" data-ng-repeat="v in vout.v">
                 <strong translate>{{v.name}}</strong>
-                <span class="text-muted">{{v.value}}</span>
+                <span data-ng-show="v.name != 'fee'" class="text-muted">{{v.value}}</span>
+                <span data-ng-show="v.name == 'fee'" class="text-muted">{{$root.currency.getConvertion(v.value) || v.value + ' PART'}}</span>
+                
               </p>
               </div>
           </div>
