@@ -20,7 +20,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     var u = 0;
 
     for(var i=0; i < l; i++) {
-
+      
       var notAddr = false;
       // non standard input
       if (items[i].scriptSig && !items[i].addr) {
@@ -64,6 +64,17 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       
       if (items[i].data)
         tmp[addr].data = items[i].data;
+      
+      if (tmp[addr].type == 'blind' || tmp[addr].type == 'anon')
+      {
+        tmp[addr].valueCommitment = items[i].valueCommitment;
+        
+        tmp[addr].rp_exponent = items[i].rp_exponent;
+        tmp[addr].rp_mantissa = items[i].rp_mantissa;
+        tmp[addr].rp_min_value = items[i].rp_min_value;
+        tmp[addr].rp_max_value = items[i].rp_max_value;
+        tmp[addr].rp_size = items[i].rp_size;
+      }
 
       if (items[i].unconfirmedInput)
         tmp[addr].unconfirmedInput = true;

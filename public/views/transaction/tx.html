@@ -35,7 +35,8 @@
         <div class="panel panel-default" data-ng-repeat="vin in tx.vinSimple| startFrom:currentInNoExpanded*sizeInNoExpanded | limitTo:sizeInNoExpanded">
           <div class="panel-body transaction-vin-vout">
             <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}">
-              {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}
+              <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+              <span data-ng-show="vin.value < 0" translate>Blinded</span>
             </div>
             <div class="ellipsis">
               <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
@@ -68,7 +69,8 @@
           <div class="panel panel-default transaction-vin-vout">
             <div class="panel-body">
               <div class="pull-right btc-value">
-                {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}
+                <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+                <span data-ng-show="vin.value < 0" translate>Blinded</span>
               </div>
               <div class="ellipsis">
                 <a class="glyphicon glyphicon-chevron-right" href="tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
@@ -138,7 +140,8 @@
           <div class="transaction-vin-vout panel panel-default">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
-                {{$root.currency.getConvertion(vout.value) || vout.value + ' PART' }}
+                <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
+                <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                 <span class="text-danger" data-ng-show="vout.isSpent" tooltip="Output is spent" tooltip-placement="left">(S)</span>
                 <span class="text-success" data-ng-show="!vout.isSpent"  tooltip="Output is unspent" tooltip-placement="left">(U)</span>
               </div>
@@ -158,7 +161,6 @@
                 Data output
               </div>
             </div>
-            
           </div>
         </div>
         
@@ -176,7 +178,9 @@
           <div class="panel panel-default transaction-vin-vout">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value">
-                <span>{{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}
+                <span>
+                  <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
+                  <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                   <span class="text-success" data-ng-show="!vout.spentTxId" tooltip="Output is unspent" tooltip-placement="left">(U)</span>
                   <a class="glyphicon glyphicon-chevron-right" data-ng-show="vout.spentTxId" href="tx/{{vout.spentTxId}}/</{{vout.spentIndex}}" title="Spent at: {{vout.spentTxId}},{{vout.spentIndex}}"></a>
                 </span>
@@ -196,7 +200,7 @@
             </div>
           </div>
           
-          <div data-ng-show="vout.type != 'data'" style="padding-left: 0.7em; padding-bottom: 2em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
+          <div data-ng-show="vout.type == 'standard'" style="padding-left: 0.7em; padding-bottom: 2em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <p class="small">
                 <strong translate>Type</strong>
                 <span class="text-muted">{{vout.scriptPubKey.type}}</span>
@@ -205,6 +209,29 @@
                 <p><strong>scriptPubKey</strong></p>
                 <span class="col-md-11 text-muted ellipsis">{{vout.scriptPubKey.asm}}</span>
                 <span class="btn-copy col-md-1" clip-copy="vout.scriptPubKey.asm"></span>
+              </div>
+          </div>
+          
+          <div data-ng-show="vout.type == 'blind'" style="padding-left: 0.7em; padding-bottom: 5em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
+              <div class="small outputdetail">
+                <strong translate>Type</strong>
+                <span class="text-muted">{{vout.scriptPubKey.type}}</span>
+              </div>
+              <div class="small">
+                <strong>scriptPubKey</strong>
+                <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.scriptPubKey.asm}}</span>
+                <span class="btn-copy col-md-1" clip-copy="vout.scriptPubKey.asm"></span>
+              </div>
+              <div class="small">
+                <strong>Commitment</strong>
+                <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.valueCommitment}}</span>
+                <span class="btn-copy col-md-1" clip-copy="vout.valueCommitment"></span>
+              </div>
+              
+              <div class="small">
+                <strong>Rangeproof</strong>
+                <span class="col-md-11 text-muted ellipsis">Bytes {{vout.rp_size}}, Exponent {{vout.rp_exponent}}, Bits {{vout.rp_mantissa}}</span>
+                <span class="col-md-11 text-muted ellipsis outputdetail">Min Value {{vout.rp_min_value}}, Max Value {{vout.rp_max_value}}</span>
               </div>
           </div>
           
@@ -220,7 +247,6 @@
                 <strong translate>{{v.name}}</strong>
                 <span data-ng-show="v.name != 'fee'" class="text-muted">{{v.value}}</span>
                 <span data-ng-show="v.name == 'fee'" class="text-muted">{{$root.currency.getConvertion(v.value) || v.value + ' PART'}}</span>
-                
               </p>
               </div>
           </div>
