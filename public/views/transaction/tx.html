@@ -140,7 +140,7 @@
           <div class="transaction-vin-vout panel panel-default">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
-                <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
+                <span data-ng-show="vout.type == 'standard'">{{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
                 <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                 <span class="text-danger" data-ng-show="vout.isSpent" tooltip="Output is spent" tooltip-placement="left">(S)</span>
                 <span class="text-success" data-ng-show="!vout.isSpent"  tooltip="Output is unspent" tooltip-placement="left">(U)</span>
