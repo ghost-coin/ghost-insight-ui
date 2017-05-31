@@ -200,7 +200,7 @@
             </div>
           </div>
           
-          <div data-ng-show="vout.type == 'standard'" style="padding-left: 0.7em; padding-bottom: 2em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
+          <div data-ng-show="vout.type == 'standard'" style="padding-left: 0.7em; padding-bottom: 2em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <p class="small">
                 <strong translate>Type</strong>
                 <span class="text-muted">{{vout.scriptPubKey.type}}</span>
@@ -212,7 +212,7 @@
               </div>
           </div>
           
-          <div data-ng-show="vout.type == 'blind'" style="padding-left: 0.7em; padding-bottom: 5em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
+          <div data-ng-show="vout.type == 'blind'" style="padding-left: 0.7em; padding-bottom: 5em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <div class="small outputdetail">
                 <strong translate>Type</strong>
                 <span class="text-muted">{{vout.scriptPubKey.type}}</span>
@@ -235,7 +235,7 @@
               </div>
           </div>
           
-          <div data-ng-show="vout.type == 'data'" style="padding-left: 0.7em; padding-bottom: {{(2 + (1.5*vout.v.length))}}em; word-wrap:break-word" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
+          <div data-ng-show="vout.type == 'data'" style="padding-left: 0.7em; padding-bottom: {{(2 + (1.5*vout.v.length))}}em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <p class="small">
                 <strong translate>Hex</strong>
                 <span class="text-muted">{{vout.data}}</span>
