@@ -38,10 +38,13 @@
               <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
               <span data-ng-show="vin.value < 0" translate>Blinded</span>
             </div>
-            <div class="ellipsis">
+            <div class="ellipsis" data-ng-show="vin.type != 'anon'">
               <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
               <span class="text-muted" title="Current Particl Address" data-ng-show="vin.addr == $root.currentAddr">{{vin.addr}}</span>
               <a href="address/{{vin.addr}}" data-ng-show="!vin.notAddr && vin.addr != $root.currentAddr">{{vin.addr}}</a>
+            </div>
+            <div class="ellipsis" data-ng-show="vin.type == 'anon'">
+              Anonymous, {{vin.num_inputs}}, {{vin.ring_size}}
             </div>
             <div data-ng-show="vin.unconfirmedInput" class="text-danger"> <span class="glyphicon glyphicon-warning-sign"></span> (Input unconfirmed)</div>
             <div data-ng-show="vin.dbError" class="text-danger">
@@ -72,10 +75,13 @@
                 <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
                 <span data-ng-show="vin.value < 0" translate>Blinded</span>
               </div>
-              <div class="ellipsis">
+              <div class="ellipsis" data-ng-show="vin.type != 'anon'">
                 <a class="glyphicon glyphicon-chevron-right" href="tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
                 <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
                 <a href="address/{{vin.addr}}" data-ng-show="!vin.notAddr">{{vin.addr}}</a>
+              </div>
+              <div class="ellipsis" data-ng-show="vin.type == 'anon'">
+                Anonymous, {{vin.num_inputs}}, {{vin.ring_size}}
               </div>
               <div data-ng-show="vin.unconfirmedInput" class="text-danger"> 
                 <span class="glyphicon glyphicon-warning-sign"></span> 
@@ -142,15 +148,22 @@
               <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
                 <span data-ng-show="vout.type == 'standard'">{{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
                 <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
+                <span data-ng-show="vout.type != 'anon'" >
                 <span class="text-danger" data-ng-show="vout.isSpent" tooltip="Output is spent" tooltip-placement="left">(S)</span>
                 <span class="text-success" data-ng-show="!vout.isSpent"  tooltip="Output is unspent" tooltip-placement="left">(U)</span>
+                </span>
+                <span data-ng-show="vout.type == 'anon'" >(A)</span>
               </div>
 
-              <div class="ellipsis">
+              <div data-ng-show="vout.type != 'anon'" class="ellipsis">
                 <span data-ng-show="vout.notAddr">{{vout.addr}}</span>
                 <span class="text-muted" title="Current Particl Address" data-ng-show="address == $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{vout.addr}}</span>
                 <a href="address/{{address}}"  data-ng-show="!vout.notAddr && address != $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{address}}</a>
               </div>
+              <div data-ng-show="vout.type == 'anon'" class="ellipsis">
+                <span data-ng-repeat="address in vout.addr.split(',')">{{address}}</span>
+              </div>
+              
             </div>
             
             <div class="panel-body" data-ng-show="vout.type == 'data'">
@@ -178,15 +191,19 @@
           <div class="panel panel-default transaction-vin-vout">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value">
-                <span>
+                <span data-ng-show="vout.type != 'anon'">
                   <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
                   <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                   <span class="text-success" data-ng-show="!vout.spentTxId" tooltip="Output is unspent" tooltip-placement="left">(U)</span>
                   <a class="glyphicon glyphicon-chevron-right" data-ng-show="vout.spentTxId" href="tx/{{vout.spentTxId}}/</{{vout.spentIndex}}" title="Spent at: {{vout.spentTxId}},{{vout.spentIndex}}"></a>
                 </span>
+                 <span data-ng-show="vout.type == 'anon'" >(A)</span>
               </div>
-              <div class="ellipsis">
+              <div data-ng-show="vout.type != 'anon'" class="ellipsis">
                 <a href="address/{{address}}" data-ng-repeat="address in vout.scriptPubKey.addresses">{{address}}</a>
+              </div>
+              <div data-ng-show="vout.type == 'anon'" class="ellipsis">
+                <span data-ng-repeat="address in vout.scriptPubKey.addresses">{{address}}</span>
               </div>
             </div>
             
@@ -222,6 +239,20 @@
                 <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.scriptPubKey.asm}}</span>
                 <span class="btn-copy col-md-1" clip-copy="vout.scriptPubKey.asm"></span>
               </div>
+              <div class="small">
+                <strong>Commitment</strong>
+                <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.valueCommitment}}</span>
+                <span class="btn-copy col-md-1" clip-copy="vout.valueCommitment"></span>
+              </div>
+              
+              <div class="small">
+                <strong>Rangeproof</strong>
+                <span class="col-md-11 text-muted ellipsis">Bytes {{vout.rp_size}}, Exponent {{vout.rp_exponent}}, Bits {{vout.rp_mantissa}}</span>
+                <span class="col-md-11 text-muted ellipsis outputdetail">Min Value {{vout.rp_min_value}}, Max Value {{vout.rp_max_value}}</span>
+              </div>
+          </div>
+          
+          <div data-ng-show="vout.type == 'anon'" style="padding-left: 0.7em; padding-bottom: 5em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <div class="small">
                 <strong>Commitment</strong>
                 <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.valueCommitment}}</span>

@@ -74,6 +74,9 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
         tmp[addr].rp_min_value = items[i].rp_min_value;
         tmp[addr].rp_max_value = items[i].rp_max_value;
         tmp[addr].rp_size = items[i].rp_size;
+        
+        tmp[addr].num_inputs = items[i].num_inputs;
+        tmp[addr].ring_size = items[i].ring_size;
       }
 
       if (items[i].unconfirmedInput)
