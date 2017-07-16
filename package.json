@@ -40,8 +40,8 @@
   ],
   "bitcoreNode": "bitcore-node",
   "insightConfig": {
-    "apiPrefix": "particl-insight-api",
-    "routePrefix": "insight"
+    "apiPrefix": "api",
+    "routePrefix": ""
   },
   "scripts": {
     "build": "bower install && grunt compile",
