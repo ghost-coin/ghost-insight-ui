@@ -10,7 +10,7 @@
   </div>
   <div class="col-xs-5 col-md-4 text-right text-muted">
     <div data-ng-show="tx.firstSeenTs">
-      <span translate>first seen at</span> 
+      <span translate>first seen at</span>
       <time>{{tx.firstSeenTs * 1000 | date:'medium'}}</time>
     </div>
     <div data-ng-show="tx.blocktime && !tx.firstSeenTs">
@@ -35,8 +35,8 @@
         <div class="panel panel-default" data-ng-repeat="vin in tx.vinSimple| startFrom:currentInNoExpanded*sizeInNoExpanded | limitTo:sizeInNoExpanded">
           <div class="panel-body transaction-vin-vout">
             <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}">
-              <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
-              <span data-ng-show="vin.value < 0" translate>Blinded</span>
+              <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+              <span data-ng-show="vin.type != 'standard'" translate>Blinded</span>
             </div>
             <div class="ellipsis" data-ng-show="vin.type != 'anon'">
               <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
@@ -48,20 +48,20 @@
             </div>
             <div data-ng-show="vin.unconfirmedInput" class="text-danger"> <span class="glyphicon glyphicon-warning-sign"></span> (Input unconfirmed)</div>
             <div data-ng-show="vin.dbError" class="text-danger">
-              <span class="glyphicon glyphicon-warning-sign"></span> 
+              <span class="glyphicon glyphicon-warning-sign"></span>
               <span translate>Incoherence in levelDB detected:</span> {{vin.dbError}}
             </div>
-            <div data-ng-show="vin.doubleSpentTxID" class="text-danger"> 
-              <span class="glyphicon glyphicon-warning-sign"></span> 
-              <span translate>Double spent attempt detected. From tx:</span> 
+            <div data-ng-show="vin.doubleSpentTxID" class="text-danger">
+              <span class="glyphicon glyphicon-warning-sign"></span>
+              <span translate>Double spent attempt detected. From tx:</span>
               <a href="tx/{{vin.doubleSpentTxID}}">{{vin.doubleSpentTxID}},{{vin.doubleSpentIndex}}</a>
             </div>
           </div>
         </div>
         <div class="showmore_collapse text-left" data-ng-show="tx.vinSimple.length > 5" data-ng-class="{ 'hidden': itemsExpanded}">
-          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeInNoExpanded != tx.vinSimple.length" ng-click="currentInNoExpanded=0; sizeInNoExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeInNoExpanded != tx.vinSimple.length" ng-click="currentInNoExpanded=0; sizeInNoExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i>
             <span translate>Show less</span></button>
-          <button type="button" class="btn btn-info btn-sm" ng-hide="currentInNoExpanded >= tx.vinSimple.length/sizeInNoExpanded - 1" ng-click="currentInNoExpanded=0; sizeInNoExpanded=tx.vinSimple.length"><i class="glyphicon glyphicon-chevron-down"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="currentInNoExpanded >= tx.vinSimple.length/sizeInNoExpanded - 1" ng-click="currentInNoExpanded=0; sizeInNoExpanded=tx.vinSimple.length"><i class="glyphicon glyphicon-chevron-down"></i>
             <span translate>Show more</span></button>
         </div>
       </div>
@@ -72,8 +72,8 @@
           <div class="panel panel-default transaction-vin-vout">
             <div class="panel-body">
               <div class="pull-right btc-value">
-                <span data-ng-show="vin.value >= 0"> {{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
-                <span data-ng-show="vin.value < 0" translate>Blinded</span>
+                <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+                <span data-ng-show="vin.type != 'standard'" translate>Blinded</span>
               </div>
               <div class="ellipsis" data-ng-show="vin.type != 'anon'">
                 <a class="glyphicon glyphicon-chevron-right" href="tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
@@ -83,17 +83,17 @@
               <div class="ellipsis" data-ng-show="vin.type == 'anon'">
                 Anonymous, {{vin.num_inputs}}, {{vin.ring_size}}
               </div>
-              <div data-ng-show="vin.unconfirmedInput" class="text-danger"> 
-                <span class="glyphicon glyphicon-warning-sign"></span> 
+              <div data-ng-show="vin.unconfirmedInput" class="text-danger">
+                <span class="glyphicon glyphicon-warning-sign"></span>
                 <span translate>(Input unconfirmed)</span>
               </div>
-              <div data-ng-show="vin.dbError" class="text-danger"> 
-                <span class="glyphicon glyphicon-warning-sign"></span> 
+              <div data-ng-show="vin.dbError" class="text-danger">
+                <span class="glyphicon glyphicon-warning-sign"></span>
                 <span translate>Incoherence in levelDB detected:</span> {{vin.dbError}}
               </div>
-              <div data-ng-show="vin.doubleSpentTxID" class="text-danger"> 
-                <span class="glyphicon glyphicon-warning-sign"></span> 
-                <span translate>Double spent attempt detected. From tx:</span> 
+              <div data-ng-show="vin.doubleSpentTxID" class="text-danger">
+                <span class="glyphicon glyphicon-warning-sign"></span>
+                <span translate>Double spent attempt detected. From tx:</span>
                 <a href="tx/{{<vin class=""></vin>doubleSpentTxID}}">{{vin.doubleSpentTxID}},{{vin.doubleSpentIndex}}</a>
               </div>
             </div> <!-- END OF PANEL BODY -->
@@ -121,9 +121,9 @@
             <span translate>Show all</span></button>
         </div>
         <div class="showmore_collapse text-left" data-ng-show="tx.vin.length > 5 && !fromVinCollapsed" data-ng-class="{ 'hidden': !itemsExpanded}">
-          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeInExpanded != tx.vin.length" ng-click="currentInExpanded=0; sizeInExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeInExpanded != tx.vin.length" ng-click="currentInExpanded=0; sizeInExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i>
             <span translate>Show less</span></button>
-          <button type="button" class="btn btn-info btn-sm" ng-hide="currentInExpanded >= tx.vin.length/sizeInExpanded - 1" ng-click="currentInExpanded=0; sizeInExpanded=tx.vin.length"><i class="glyphicon glyphicon-chevron-down"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="currentInExpanded >= tx.vin.length/sizeInExpanded - 1" ng-click="currentInExpanded=0; sizeInExpanded=tx.vin.length"><i class="glyphicon glyphicon-chevron-down"></i>
             <span translate>Show more</span></button>
         </div>
       </div>
@@ -142,7 +142,7 @@
       <!-- Simple view >>> -->
       <div data-ng-if="!itemsExpanded" data-ng-init="currentOutNoExpanded=0; sizeOutNoExpanded=5">
         <div data-ng-repeat="vout in tx.voutSimple| startFrom:currentOutNoExpanded*sizeOutNoExpanded | limitTo:sizeOutNoExpanded">
-          
+
           <div class="transaction-vin-vout panel panel-default">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
@@ -163,9 +163,9 @@
               <div data-ng-show="vout.type == 'anon'" class="ellipsis">
                 <span data-ng-repeat="address in vout.addr.split(',')">{{address}}</span>
               </div>
-              
+
             </div>
-            
+
             <div class="panel-body" data-ng-show="vout.type == 'data'">
               <div class="pull-right">
                 {{vout.data.length / 2}} <span translate>bytes</span>
@@ -176,11 +176,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="showmore_collapse text-left" data-ng-show="tx.voutSimple.length > 5" data-ng-class="{ 'hidden': itemsExpanded}">
-          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeOutNoExpanded != tx.voutSimple.length" ng-click="currentOutNoExpanded=0; sizeOutNoExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="sizeOutNoExpanded != tx.voutSimple.length" ng-click="currentOutNoExpanded=0; sizeOutNoExpanded=5"><i class="glyphicon glyphicon-chevron-up"></i>
             <span translate>Show less</span></button>
-          <button type="button" class="btn btn-info btn-sm" ng-hide="currentOutNoExpanded >= tx.voutSimple.length/sizeOutNoExpanded - 1" ng-click="currentOutNoExpanded=0; sizeOutNoExpanded=tx.voutSimple.length"><i class="glyphicon glyphicon-chevron-down"></i> 
+          <button type="button" class="btn btn-info btn-sm" ng-hide="currentOutNoExpanded >= tx.voutSimple.length/sizeOutNoExpanded - 1" ng-click="currentOutNoExpanded=0; sizeOutNoExpanded=tx.voutSimple.length"><i class="glyphicon glyphicon-chevron-down"></i>
             <span translate>Show more</span></button>
         </div>
       </div>
@@ -206,7 +206,7 @@
                 <span data-ng-repeat="address in vout.scriptPubKey.addresses">{{address}}</span>
               </div>
             </div>
-            
+
             <div class="panel-body" data-ng-show="vout.type == 'data'">
               <div class="pull-right">
                 {{vout.data.length / 2}} <span translate>bytes</span>
@@ -216,7 +216,7 @@
               </div>
             </div>
           </div>
-          
+
           <div data-ng-show="vout.type == 'standard'" style="padding-left: 0.7em; padding-bottom: 2em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <p class="small">
                 <strong translate>Type</strong>
@@ -228,7 +228,7 @@
                 <span class="btn-copy col-md-1" clip-copy="vout.scriptPubKey.asm"></span>
               </div>
           </div>
-          
+
           <div data-ng-show="vout.type == 'blind'" style="padding-left: 0.7em; padding-bottom: 5em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <div class="small outputdetail">
                 <strong translate>Type</strong>
@@ -244,34 +244,34 @@
                 <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.valueCommitment}}</span>
                 <span class="btn-copy col-md-1" clip-copy="vout.valueCommitment"></span>
               </div>
-              
+
               <div class="small">
                 <strong>Rangeproof</strong>
                 <span class="col-md-11 text-muted ellipsis">Bytes {{vout.rp_size}}, Exponent {{vout.rp_exponent}}, Bits {{vout.rp_mantissa}}</span>
                 <span class="col-md-11 text-muted ellipsis outputdetail">Min Value {{vout.rp_min_value}}, Max Value {{vout.rp_max_value}}</span>
               </div>
           </div>
-          
+
           <div data-ng-show="vout.type == 'anon'" style="padding-left: 0.7em; padding-bottom: 5em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <div class="small">
                 <strong>Commitment</strong>
                 <span class="col-md-11 text-muted ellipsis outputdetail">{{vout.valueCommitment}}</span>
                 <span class="btn-copy col-md-1" clip-copy="vout.valueCommitment"></span>
               </div>
-              
+
               <div class="small">
                 <strong>Rangeproof</strong>
                 <span class="col-md-11 text-muted ellipsis">Bytes {{vout.rp_size}}, Exponent {{vout.rp_exponent}}, Bits {{vout.rp_mantissa}}</span>
                 <span class="col-md-11 text-muted ellipsis outputdetail">Min Value {{vout.rp_min_value}}, Max Value {{vout.rp_max_value}}</span>
               </div>
           </div>
-          
+
           <div data-ng-show="vout.type == 'data'" style="padding-left: 0.7em; padding-bottom: {{(2 + (1.5*vout.v.length))}}em;" data-ng-class="{true: 'v_highlight', false: ''}[from_vout == true && v_index == vout.n]">
               <p class="small">
                 <strong translate>Hex</strong>
                 <span class="text-muted">{{vout.data}}</span>
               </p>
-              
+
               <div class="small">
               <p><strong>Decoded</strong></p>
               <p class="col-md-11" data-ng-show="vout.v && vout.v.length > 0" data-ng-repeat="v in vout.v">
@@ -281,7 +281,7 @@
               </p>
               </div>
           </div>
-          
+
         </div>
         <div class="text-right">
           <button type="button" class="btn btn-default btn-sm" data-ng-show="(from_vout) && tx.vout.length > 1" data-ng-disabled="fromVoutCollapsed" data-ng-click="currentOutExpanded=0; sizeOutExpanded=tx.vout.length;fromVoutCollapsed=1">Show output #{{ v_index }}</button>
