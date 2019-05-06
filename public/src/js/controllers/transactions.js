@@ -153,6 +153,23 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     });
   };
 
+  var _updateTx = function(txIndex) {
+    if (txIndex === $scope.txs.length) {
+      return;
+    }
+
+    Transaction.get({
+      txId: $scope.txs[txIndex].txid
+    }, function(tx) {
+      $scope.txs[txIndex].confirmations = tx.confirmations;
+      txIndex++;
+      _updateTx(txIndex);
+    }, function(e) {
+      txIndex++;
+      _updateTx(txIndex)
+    });
+  };
+
   $scope.findThis = function() {
     _findTx($routeParams.txId);
   };
@@ -190,6 +207,10 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
   $scope.$on('tx', function(event, txid) {
     _findTx(txid);
+  });
+
+  $scope.$on('block', function(event, blockHash) {
+    _updateTx(0);
   });
 
 });
