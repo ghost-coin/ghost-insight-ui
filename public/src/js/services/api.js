@@ -4,6 +4,6 @@ angular.module('insight.api')
   .factory('Api',
     function() {
       return {
-        apiPrefix: '/particl-insight-api'
+        apiPrefix: '/ghost-insight-api'
       }
     });
