@@ -1,6 +1,6 @@
 # Insight UI
 
-A Particl blockchain explorer web application service for [Bitcore Node](https://github.com/particl/particl-bitcore-node) using the [Insight API](https://github.com/particl/particl-insight-api).
+A Ghost blockchain explorer web application service for [Bitcore Node](https://github.com/ghost-coin/ghost-bitcore-node) using the [Insight API](https://github.com/ghost-coin/ghost-insight-api).
 
 ## Quick Start
 
@@ -88,11 +88,11 @@ compile***.
 
 ## Note
 
-For more details about the [Insight API](https://github.com/particl/particl-insight-api) configuration and end-points, go to [Insight API GitHub repository](https://github.com/particl/particl-insight-api).
+For more details about the [Insight API](https://github.com/ghost-coin/ghost-insight-api) configuration and end-points, go to [Insight API GitHub repository](https://github.com/ghost-coin/ghost-insight-api).
 
 ## Contribute
 
-Contributions and suggestions are welcomed at the [Insight UI GitHub repository](https://github.com/particl/particl-insight-ui).
+Contributions and suggestions are welcomed at the [Insight UI GitHub repository](https://github.com/ghost-coin/ghost-insight-ui).
 
 
 ## License
