@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /* Styling for the ngProgress itself */
 #ngProgress {
-  background-color: #6C9032 !important;
+  background-color: #065a8a !important;
   box-shadow: none !important;
   color: #373D42 !important;
   height: 3px !important;
@@ -115,20 +115,20 @@ margin-left: 0;
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {background-color: #373D42;}
 
 .navbar-default {
-  background-color: #02E8AF;
+  background-color: black;
   margin: 0;
   border: 0;
 }
 
 .navbar-default .navbar-nav>li>a {
-  color: #121212;
+  color: white;
   font-family: 'Ubuntu', sans-serif;
   padding-left: 20px;
   padding-right: 20px;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
-  background-color: #6C9032;
+  background-color: #065a8a;
   color: #fff;
 }
 
@@ -201,14 +201,14 @@ margin-left: 0;
 #search { color: #fff; }
 
 #search::-webkit-input-placeholder {
-  color: #BCDF7E;
+  color: white;
   font-family: 'Ubuntu', sans-serif;
   font-style: italic;
   font-weight: 100;
 }
 
 #search::-moz-placeholder {
-  color: #BCDF7E;
+  color: white;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 100;
 }
@@ -316,8 +316,8 @@ margin-left: 0;
   border-radius: 2px;
 }
 .btn-primary {
-  background-color: #02E8AF;
-  border: 2px solid #76AF0F;
+  background-color: #065a8a;
+  border: 2px solid #065a8a;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
@@ -363,7 +363,7 @@ margin-left: 0;
 }
 
 .txvalues-primary {
-  background-color: #02E8AF;
+  background-color: #065a8a;
   color: #000;
 }
 
@@ -387,7 +387,7 @@ margin-left: 0;
   font-size: 14px;
   font-weight: normal;
 }
-.progress-bar-info { background-color: #02E8AF; }
+.progress-bar-info { background-color: #065a8a; }
 .progress-bar { color: #000; }
 
 /* Set the fixed height of the footer here */
@@ -461,7 +461,7 @@ margin-left: 0;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   border-top: none;
-  border: 1px solid #64920F;
+  border: 1px solid #065a8a;
   padding: 10px 20px;
   position: absolute;
   text-align: center;
@@ -828,7 +828,7 @@ a.v_highlight_more {
   }
   .txvalues-primary {
     background: none;
-    color: #02E8AF;
+    color: #065a8a;
   }
   .txvalues-default {
     background: none;

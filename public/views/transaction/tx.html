@@ -35,7 +35,7 @@
         <div class="panel panel-default" data-ng-repeat="vin in tx.vinSimple| startFrom:currentInNoExpanded*sizeInNoExpanded | limitTo:sizeInNoExpanded">
           <div class="panel-body transaction-vin-vout">
             <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}">
-              <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+              <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' GHOST'}}</span>
               <span data-ng-show="vin.type != 'standard'" translate>Blinded</span>
             </div>
             <div class="ellipsis" data-ng-show="vin.type != 'anon'">
@@ -72,7 +72,7 @@
           <div class="panel panel-default transaction-vin-vout">
             <div class="panel-body">
               <div class="pull-right btc-value">
-                <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' PART'}}</span>
+                <span data-ng-show="vin.type == 'standard'">{{$root.currency.getConvertion(vin.value) || vin.value + ' GHOST'}}</span>
                 <span data-ng-show="vin.type != 'standard'" translate>Blinded</span>
               </div>
               <div class="ellipsis" data-ng-show="vin.type != 'anon'">
@@ -146,7 +146,7 @@
           <div class="transaction-vin-vout panel panel-default">
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
-                <span data-ng-show="vout.type == 'standard'">{{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
+                <span data-ng-show="vout.type == 'standard'">{{$root.currency.getConvertion(vout.value) || vout.value + ' GHOST'}}</span>
                 <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                 <span data-ng-show="vout.type != 'anon'" >
                 <span class="text-danger" data-ng-show="vout.isSpent" tooltip="Output is spent" tooltip-placement="left">(S)</span>
@@ -192,7 +192,7 @@
             <div class="panel-body" data-ng-show="vout.type != 'data'">
               <div class="pull-right btc-value">
                 <span data-ng-show="vout.type != 'anon'">
-                  <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' PART'}}</span>
+                  <span data-ng-show="vout.type == 'standard'"> {{$root.currency.getConvertion(vout.value) || vout.value + ' GHOST'}}</span>
                   <span data-ng-show="vout.type != 'standard'" translate>Blinded</span>
                   <span class="text-success" data-ng-show="!vout.spentTxId" tooltip="Output is unspent" tooltip-placement="left">(U)</span>
                   <a class="glyphicon glyphicon-chevron-right" data-ng-show="vout.spentTxId" href="tx/{{vout.spentTxId}}/</{{vout.spentIndex}}" title="Spent at: {{vout.spentTxId}},{{vout.spentIndex}}"></a>
@@ -277,7 +277,7 @@
               <p class="col-md-11" data-ng-show="vout.v && vout.v.length > 0" data-ng-repeat="v in vout.v">
                 <strong translate>{{v.name}}</strong>
                 <span data-ng-show="v.name != 'fee'" class="text-muted">{{v.value}}</span>
-                <span data-ng-show="v.name == 'fee'" class="text-muted">{{$root.currency.getConvertion(v.value) || v.value + ' PART'}}</span>
+                <span data-ng-show="v.name == 'fee'" class="text-muted">{{$root.currency.getConvertion(v.value) || v.value + ' GHOST'}}</span>
               </p>
               </div>
           </div>
@@ -304,14 +304,14 @@
 <div class="line-top row" data-ng-hide="!tx">
   <div class="col-xs-6 col-sm-4 col-md-4">
     <span data-ng-show="!tx.isCoinBase && !tx.isCoinStake && !isNaN(parseFloat(tx.fees))"
-      class="txvalues txvalues-default"><span translate>Fee</span>: {{$root.currency.getConvertion(tx.fees) || tx.fees + 'PART'}} </span>
+      class="txvalues txvalues-default"><span translate>Fee</span>: {{$root.currency.getConvertion(tx.fees) || tx.fees + 'GHOST'}} </span>
     <span data-ng-show="tx.isCoinStake &&  !isNaN(parseFloat(tx.fees))"
-      class="txvalues txvalues-default"><span translate>Reward</span>: {{$root.currency.getConvertion(tx.fees * -1.0) || (tx.fees * -1.0) + 'PART'}} </span>
+      class="txvalues txvalues-default"><span translate>Reward</span>: {{$root.currency.getConvertion(tx.fees * -1.0) || (tx.fees * -1.0) + 'GHOST'}} </span>
   </div>
   <div class="col-xs-6 col-sm-8 col-md-8 text-right">
     <span data-ng-show="tx.confirmations" class="txvalues
       txvalues-success">{{tx.confirmations}} <span translate>Confirmations</span></span>
     <span data-ng-show="!tx.confirmations" class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span>
-    <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' PART' }}</span>
+    <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' GHOST' }}</span>
   </div>
 </div>
