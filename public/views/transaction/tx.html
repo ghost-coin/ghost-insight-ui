@@ -202,9 +202,9 @@
               <div data-ng-show="vout.type != 'anon'" class="ellipsis">
                 <a href="address/{{address}}" data-ng-repeat="address in vout.scriptPubKey.addresses">{{address}}</a>
               </div>
-              <div data-ng-show="vout.type == 'anon'" class="ellipsis">
+              <!-- <div data-ng-show="vout.type == 'anon'" class="ellipsis">
                 <span data-ng-repeat="address in vout.scriptPubKey.addresses">{{address}}</span>
-              </div>
+              </div> -->
             </div>
 
             <div class="panel-body" data-ng-show="vout.type == 'data'">
